@@ -61,6 +61,7 @@ class WeatherActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_weather)
 
+
         drawLayout = find(R.id.drawer_layout)
         swipRefresh = find(R.id.swipe_refresh)
         scrollView = find(R.id.weather_layout)
@@ -77,7 +78,9 @@ class WeatherActivity : AppCompatActivity() {
         /** ?表示是否为null */
         swipRefresh!!.setColorSchemeResources(R.color.colorPrimary)
         /** 控件id直接调用 */
-        nav_button.setOnClickListener { drawLayout!!.openDrawer(GravityCompat.START) }
+        nav_button.setOnClickListener {
+            drawLayout!!.openDrawer(GravityCompat.START)
+        }
 
         /** weatherId */
         val weatherId = defaultSharedPreferences.getString("weather_id", "")

@@ -3,6 +3,7 @@ package cn.cslg.weatherdemokotlin
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import cn.cslg.weatherdemokotlin.adapter.AdapterCity
 import cn.cslg.weatherdemokotlin.adapter.AdapterCounty
 import cn.cslg.weatherdemokotlin.adapter.AdapterProvince
 import cn.cslg.weatherdemokotlin.bean.DataCity
+import cn.cslg.weatherdemokotlin.common.LOG_TAG
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.choose_area.*
@@ -31,6 +33,9 @@ import java.util.ArrayList
  * <br> Copyright: Copyright © 2016 xTeam Technology. All rights reserved.
  */
 class ChooseCityFragment : Fragment() {
+
+    private val LEVEL_WHOLE = 3
+
     /** 省 */
     private val LEVEL_PROVINCE = 0
     /** 市 */
@@ -73,19 +78,24 @@ class ChooseCityFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        current_level = 0
         list_view.setOnItemClickListener {
             /** 没有用到的参数用 "_"表示 */
             _, _, position, _ ->
             when(current_level){
+
                 LEVEL_PROVINCE -> {
+                    Log.e(LOG_TAG, "当前level --" + current_level)
                     curProvince = provinceList[position]
                     queryCity()
                 }
                 LEVEL_CITY -> {
+                    Log.e(LOG_TAG, "当前level --" + current_level)
                     curCity = cityList[position]
                     queryCounty()
                 }
                 LEVEL_COUNTY -> {
+                    Log.e(LOG_TAG, "当前level --" + current_level)
                     curCounty = countyList[position]
                     defaultSharedPreferences.edit().putString("weather_id", curCounty!!.weather_id).apply()
                     if (activity is MainActivity) {
@@ -96,6 +106,8 @@ class ChooseCityFragment : Fragment() {
                         act.drawLayout!!.closeDrawers()
                         act.swipRefresh!!.isRefreshing = true      //显示下拉刷新
                         act.getWeatherInfo(curCounty!!.weather_id)
+
+                        current_level = 0
                     }
                 }
             }
@@ -120,7 +132,7 @@ class ChooseCityFragment : Fragment() {
         /**
          * 这里的隐藏和显示的写法和java不同
          */
-        back_button.visibility == View.INVISIBLE //隐藏返回键
+        back_button.visibility = View.INVISIBLE //隐藏返回键
         showProgress()
 
         async {
@@ -182,8 +194,6 @@ class ChooseCityFragment : Fragment() {
             }
         }
     }
-
-
 
     //进度条
     var progress: ProgressDialog? = null
