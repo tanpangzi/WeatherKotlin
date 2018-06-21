@@ -57,10 +57,6 @@ class ChooseCityFragment : Fragment() {
     /** 当前区 */
     private var curCounty: DataCity.County? = null
 
-    /*private var backBtn: Button? = null
-    private var titleText: TextView? = null
-    private var listView: ListView? = null*/
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.choose_area, container, false)
         if (activity is WeatherActivity){
@@ -76,8 +72,10 @@ class ChooseCityFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         list_view.setOnItemClickListener {
-            parent, view, position, id ->
+            /** 没有用到的参数用 "_"表示 */
+            _, _, position, _ ->
             when(current_level){
                 LEVEL_PROVINCE -> {
                     curProvince = provinceList[position]
@@ -89,7 +87,7 @@ class ChooseCityFragment : Fragment() {
                 }
                 LEVEL_COUNTY -> {
                     curCounty = countyList[position]
-                    defaultSharedPreferences.edit().putString("weather_id", curCounty!!.weather_Id).apply()
+                    defaultSharedPreferences.edit().putString("weather_id", curCounty!!.weather_id).apply()
                     if (activity is MainActivity) {
                         startActivity<WeatherActivity>()
                         (activity as MainActivity).finish()   //将MainActivity销毁掉
@@ -97,7 +95,7 @@ class ChooseCityFragment : Fragment() {
                         val act = activity as WeatherActivity
                         act.drawLayout!!.closeDrawers()
                         act.swipRefresh!!.isRefreshing = true      //显示下拉刷新
-                        act.getWeatherInfo(curCounty!!.weather_Id)
+                        act.getWeatherInfo(curCounty!!.weather_id)
                     }
                 }
             }
@@ -117,7 +115,7 @@ class ChooseCityFragment : Fragment() {
     /**
      * 查询省
      */
-    public fun queryProvince(){
+    fun queryProvince(){
         title_text.text = "中国"
         /**
          * 这里的隐藏和显示的写法和java不同

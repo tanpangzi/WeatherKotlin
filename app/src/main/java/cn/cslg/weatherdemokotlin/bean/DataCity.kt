@@ -13,6 +13,6 @@ class DataCity {
     /** 市 */
     data class City(val id: Int, val name: String)
     /** 区 */
-    data class County(val id:Int, val name: String, val weather_Id:String)
+    data class County(val id:Int, val name: String, val weather_id:String)
 
 }

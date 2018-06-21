@@ -28,7 +28,6 @@ import org.jetbrains.anko.defaultSharedPreferences
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import java.net.URL
-import kotlin.math.log
 
 /**
  * <br> Description
@@ -44,16 +43,7 @@ class WeatherActivity : AppCompatActivity() {
     var scrollView : ScrollView? = null
     var titleCity : TextView? = null
     var titleUpdateTime : TextView?= null
-    //var layoutForecast : LinearLayout? = null
     var imgBing:ImageView? = null
-
-    var tvDegree : TextView?= null
-    var tvWeatherInfo : TextView? = null
-    var tvAqi : TextView? = null
-    var tvPm25 : TextView? = null
-    var tvComfort : TextView? = null
-    var tvCarWash : TextView? = null
-    var tvSport : TextView? = null
 
     /** 两个公共属性 在chooseAreaFragment里调用 */
     var drawLayout : DrawerLayout? = null //侧滑
@@ -112,13 +102,12 @@ class WeatherActivity : AppCompatActivity() {
             val s = URL(url).readText()
 
             uiThread {
-                val weatherInfo = Gson().fromJson(s, Weather:: class.java)
+                val weather = Gson().fromJson(s, Weather::class.java)
                 //关闭下拉刷新
                 swipRefresh!!.isRefreshing = false
-                Log.e(LOG_TAG, url)
-                Log.e(LOG_TAG, weatherInfo.toString())
-
-                showWeatherInfo(weatherInfo.HeWeather[0])
+                Log.d("url",url)
+                Log.d("url",weather.toString())
+                showWeatherInfo(weather.HeWeather[0])
             }
         }
     }
@@ -138,10 +127,14 @@ class WeatherActivity : AppCompatActivity() {
 
         for (d in info.daily_forecast){
             val view = LayoutInflater.from(this).inflate(R.layout.forecast_item, null)
+            /** 这里不能直接调用控件id 要先find */
+            val date_text = view.find<TextView>(R.id.date_text)
+            val info_text = view.find<TextView>(R.id.info_text)
+            val max_text = view.find<TextView>(R.id.max_text)
+            val min_text = view.find<TextView>(R.id.min_text)
 
-            /** 直接在布局里加载 */
             date_text.text = d.date
-            info_text.text = d.tmp.max
+            max_text.text = d.tmp.max
             min_text.text = d.tmp.min
 
             if (d.cond.code_d == d.cond.code_n){
