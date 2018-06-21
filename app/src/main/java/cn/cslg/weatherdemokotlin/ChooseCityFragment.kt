@@ -12,7 +12,7 @@ import cn.cslg.weatherdemokotlin.adapter.AdapterCity
 import cn.cslg.weatherdemokotlin.adapter.AdapterCounty
 import cn.cslg.weatherdemokotlin.adapter.AdapterProvince
 import cn.cslg.weatherdemokotlin.bean.DataCity
-import cn.cslg.weatherdemokotlin.common.LOG_TAG
+import com.coodays.repairrent.utli.ConstantsUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.choose_area.*
@@ -85,17 +85,17 @@ class ChooseCityFragment : Fragment() {
             when(current_level){
 
                 LEVEL_PROVINCE -> {
-                    Log.e(LOG_TAG, "当前level --" + current_level)
+                    Log.e(ConstantsUtils.LOG_TAG, "当前level --" + current_level)
                     curProvince = provinceList[position]
                     queryCity()
                 }
                 LEVEL_CITY -> {
-                    Log.e(LOG_TAG, "当前level --" + current_level)
+                    Log.e(ConstantsUtils.LOG_TAG, "当前level --" + current_level)
                     curCity = cityList[position]
                     queryCounty()
                 }
                 LEVEL_COUNTY -> {
-                    Log.e(LOG_TAG, "当前level --" + current_level)
+                    Log.e(ConstantsUtils.LOG_TAG, "当前level --" + current_level)
                     curCounty = countyList[position]
                     defaultSharedPreferences.edit().putString("weather_id", curCounty!!.weather_id).apply()
                     if (activity is MainActivity) {

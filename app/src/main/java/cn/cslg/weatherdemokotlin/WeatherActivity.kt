@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.*
 import cn.cslg.weatherdemokotlin.bean.HeWeather
 import cn.cslg.weatherdemokotlin.bean.Weather
-import cn.cslg.weatherdemokotlin.common.LOG_TAG
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_weather.*
