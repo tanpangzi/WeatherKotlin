@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import cn.cslg.weatherdemokotlin.AppApplication;
+import cn.cslg.weatherdemokotlin.BaseApplication;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
@@ -27,7 +27,7 @@ public class PersistentCookieStore {
 
     public static PersistentCookieStore newInstance() {
         if (null == instance) {
-            instance = new PersistentCookieStore(AppApplication.getInstance());
+            instance = new PersistentCookieStore(BaseApplication.getInstance());
         }
         return instance;
     }

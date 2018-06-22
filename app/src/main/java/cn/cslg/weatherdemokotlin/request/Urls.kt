@@ -1,7 +1,6 @@
 package com.coodays.repairrent.net
 
-import android.provider.SyncStateContract
-import cn.cslg.weatherdemokotlin.common.BASE_URL
+import com.coodays.repairrent.utli.ConstantsUtils
 
 
 class Urls {
@@ -82,7 +81,7 @@ class Urls {
             get() = getDomain()+field
 
         private fun getDomain(): String {
-            return BASE_URL
+            return ConstantsUtils.BASE_URL
         }
     }
 

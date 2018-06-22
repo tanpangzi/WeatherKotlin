@@ -23,10 +23,10 @@ import cn.cslg.weatherdemokotlin.util.PreferencesUtil;
  * <br> Date: 2016年12月24日
  * <br> Copyright: Copyright © 2016 xTeam Technology. All rights reserved.
  */
-public class AppApplication extends Application {
+public class BaseApplication extends Application {
 
     /** 全局TApplication  获取全局上下文，可用于文本、图片、sp数据的资源加载，不可用于视图级别的创建和展示 */
-    protected static AppApplication application;
+    protected static BaseApplication application;
     /** 当前app处于start状态的activity数量 >0 则说明当前app在栈顶 */
     private int startCount;
     /** 用户信息bean */
@@ -64,17 +64,17 @@ public class AppApplication extends Application {
      * 保存用户信息
      */
     public static void saveUserInfoBean() {
-        PreferencesUtil.Companion.put(ConstantsUtils.SP_KEY_FILE_USER_INFO, AppApplication.getInstance().userInfoBean);
+        PreferencesUtil.Companion.put(ConstantsUtils.SP_KEY_FILE_USER_INFO, BaseApplication.getInstance().userInfoBean);
     }
 
     /**
      * 获取全局TApplication
      */
-    public static AppApplication getInstance() {
+    public static BaseApplication getInstance() {
         if (application == null) {
-            synchronized (AppApplication.class) {
+            synchronized (BaseApplication.class) {
                 if (application == null) {
-                    application = new AppApplication();
+                    application = new BaseApplication();
                 }
             }
         }

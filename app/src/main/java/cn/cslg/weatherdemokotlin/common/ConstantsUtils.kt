@@ -1,6 +1,6 @@
 package com.coodays.repairrent.utli
 
-import cn.cslg.weatherdemokotlin.AppApplication
+import cn.cslg.weatherdemokotlin.BaseApplication
 
 /**
  * Created by payne on 2017/6/20.
@@ -31,7 +31,7 @@ class ConstantsUtils {
         /** 普通图片压缩裁剪的后缀 */
         const val IMAGE_LOGO_COMPRESS = "_compress+new."
 
-        val CONSTANT_KEY_BASE = AppApplication.getInstance().getApplicationContext().getPackageName() + "."
+        val CONSTANT_KEY_BASE = BaseApplication.getInstance().getApplicationContext().getPackageName() + "."
 
         /** sp文件名 -- 用户 */
         const val SP_KEY_FILE_USER_INFO = "zmx"

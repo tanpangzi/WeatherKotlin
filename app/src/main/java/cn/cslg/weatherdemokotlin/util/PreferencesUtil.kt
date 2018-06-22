@@ -1,7 +1,7 @@
 package cn.cslg.weatherdemokotlin.util
 
 import android.content.Context
-import cn.cslg.weatherdemokotlin.AppApplication
+import cn.cslg.weatherdemokotlin.BaseApplication
 import com.coodays.repairrent.utli.ConstantsUtils
 import java.util.*
 
@@ -20,7 +20,7 @@ class PreferencesUtil {
          * Any相当于java里的object
          */
         fun put(key: String, value: Any) {
-            val context = AppApplication.getInstance().applicationContext
+            val context = BaseApplication.getInstance().applicationContext
             val sp = context.getSharedPreferences(ConstantsUtils.SP_FILE_NAME, Context.MODE_PRIVATE)
             val editor = sp.edit()
 
@@ -61,7 +61,7 @@ class PreferencesUtil {
          * Any相当于java里的object
          */
         fun get(key: String, default: Any): Any {
-            val context = AppApplication.getInstance().applicationContext
+            val context = BaseApplication.getInstance().applicationContext
             val sp = context.getSharedPreferences(ConstantsUtils.SP_FILE_NAME, Context.MODE_PRIVATE)
 
             return when (default) {
@@ -78,7 +78,7 @@ class PreferencesUtil {
          * 去掉某个字段
          */
         fun remove(key: String) {
-            val context = AppApplication.getInstance().applicationContext
+            val context = BaseApplication.getInstance().applicationContext
             val sp = context.getSharedPreferences(ConstantsUtils.SP_FILE_NAME, Context.MODE_PRIVATE)
 
             val editor = sp.edit()
@@ -93,7 +93,7 @@ class PreferencesUtil {
          * 清除所有数据
          */
         fun clear() {
-            val context = AppApplication.getInstance().applicationContext
+            val context = BaseApplication.getInstance().applicationContext
             val sp = context.getSharedPreferences(ConstantsUtils.SP_FILE_NAME, Context.MODE_PRIVATE)
             val editor = sp.edit()
             editor.clear()
@@ -107,7 +107,7 @@ class PreferencesUtil {
          * 查询某个key是否已经存在
          */
         fun isContain(key: String): Boolean {
-            val context = AppApplication.getInstance().applicationContext
+            val context = BaseApplication.getInstance().applicationContext
             val sp = context.getSharedPreferences(ConstantsUtils.SP_FILE_NAME, Context.MODE_PRIVATE)
             return sp.contains(key)
         }
