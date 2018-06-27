@@ -18,7 +18,6 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.aqi.*
 import kotlinx.android.synthetic.main.forecast.*
-import kotlinx.android.synthetic.main.forecast_item.*
 import kotlinx.android.synthetic.main.now.*
 import kotlinx.android.synthetic.main.suggestion.*
 import kotlinx.android.synthetic.main.title.*

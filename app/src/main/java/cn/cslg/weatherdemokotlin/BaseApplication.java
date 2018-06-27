@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 
 import com.coodays.repairrent.utli.ConstantsUtils;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import cn.cslg.weatherdemokotlin.bean.User;
 import cn.cslg.weatherdemokotlin.util.PreferencesUtil;
@@ -32,6 +34,7 @@ public class BaseApplication extends Application {
     /** 用户信息bean */
     private User.UserInfoLoginBean userInfoBean;
 
+    private RefWatcher refWatcher;
 
     public User.UserInfoLoginBean getUserInfoBean() {
         if (userInfoBean == null) {
@@ -81,12 +84,21 @@ public class BaseApplication extends Application {
         return application;
     }
 
+    private void initLeakCanary(){
+        if (LeakCanary.isInAnalyzerProcess(this)){
+            refWatcher = RefWatcher.DISABLED;
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
+    }
+
 
     @Override
     public void onCreate() {
         application = this;
         //applicationId要和包路径相同，才能正常重启APP WelcomeActivity
         initData("SplashActivity");
+        initLeakCanary();
         super.onCreate();
     }
 

@@ -21,7 +21,6 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.defaultSharedPreferences
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.uiThread
-import java.lang.annotation.RetentionPolicy
 import java.net.URL
 import java.util.ArrayList
 
